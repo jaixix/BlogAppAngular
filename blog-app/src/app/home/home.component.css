@@ -1,0 +1,33 @@
+.container{
+    text-align: center !important;
+    align-items: center !important;
+}
+
+ul{
+    margin-top: 40px;
+}
+
+li{
+    text-decoration: none;
+    list-style-type: none;
+    margin-top: 10px;
+}
+
+.btn{
+    width: 200px;
+}
+
+a{
+    text-decoration: none;
+    
+}
+
+a:hover { text-decoration: none; }
+
+
+a:active { text-decoration: none; }
+
+hr{
+    margin-top: 20px;
+    margin-bottom: -10px;
+}

@@ -1,0 +1,12 @@
+<div class="container m-3" style="width: 400px">
+  <div class="row m-3">
+    <div class="col">
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let post of fetchedPosts">
+          <h3>{{ post.title }}</h3>
+          <p>{{ post.content }}</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
