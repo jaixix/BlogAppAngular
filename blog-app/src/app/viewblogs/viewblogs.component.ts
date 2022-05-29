@@ -14,9 +14,7 @@ export class ViewblogsComponent implements OnInit {
   fetchedPosts: PostData[] = [];
   firebaseUrl =
     'https://blog-app-e6bdb-default-rtdb.firebaseio.com/posts.json';
-  ngOnInit(): void {}
-
-  onFetchPosts(){
+  ngOnInit(): void {
     this.http.get(this.firebaseUrl).pipe(map((responseData) => {
       const postsArray : PostData[] = [];
       for(const key in responseData){
@@ -26,6 +24,10 @@ export class ViewblogsComponent implements OnInit {
     })).subscribe((posts) => {
       this.fetchedPosts = posts;
     });
+  }
+
+  editBlog(fetchedPostsFromUI : []){
+    console.log(fetchedPostsFromUI);
   }
 
 }

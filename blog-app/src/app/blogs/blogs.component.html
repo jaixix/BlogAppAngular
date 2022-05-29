@@ -39,6 +39,7 @@
           class="btn btn-primary"
           [disabled]="!f.valid"
           (click)="createPost(f.value)"
+          (click)="successMessageCreated()"
         >
           Submit Post
         </button>
@@ -46,26 +47,14 @@
     </div>
     <div class="row m-3">
       <div class="col">
-        <button class="btn btn-primary btn-sm" (click)="onFetchPosts()">
-          Fetch Posts
-        </button>
-        |
-        <button class="btn btn-danger btn-sm" (click)="onClearPosts()">
+        <button
+          class="btn btn-danger btn-sm"
+          (click)="onClearPosts()"
+          (click)="successMessageCleared()"
+        >
           Clear Posts
         </button>
       </div>
     </div>
   </form>
-  <div class="container m-3" style="width: 400px">
-    <div class="row m-3">
-      <div class="col">
-        <ul class="list-group">
-          <li class="list-group-item" *ngFor="let post of fetchedPosts">
-            <h3>{{ post.title }}</h3>
-            <p>{{ post.content }}</p>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
 </div>
