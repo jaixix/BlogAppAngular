@@ -1,15 +1,15 @@
-<div class="container m-3" style="width: 440px">
+<div class="container" style="width: 530px">
   <form #f="ngForm">
     <div class="row m-3">
       <div class="form-group">
         <div class="col">
-          <label for="title">Title</label>
+          <label for="title"><strong>Title</strong></label>
           <input
             type="text"
             class="form-control"
             name="title"
             placeholder="Think of a name, quick!"
-            ngModel
+            [(ngModel)]="blogTitle"
             required
           />
         </div>
@@ -18,7 +18,7 @@
     <div class="row m-3">
       <div class="form-group">
         <div class="col">
-          <label for="content">Content</label>
+          <label for="content"><strong>Content</strong></label>
         </div>
         <div class="col">
           <textarea
@@ -27,7 +27,7 @@
             cols="45"
             rows="8"
             placeholder="Write your heart out!"
-            ngModel
+            [(ngModel)]="blogContent"
             required
           ></textarea>
         </div>
@@ -47,6 +47,10 @@
     </div>
     <div class="row m-3">
       <div class="col">
+        <button class="btn btn-success btn-sm" (click)="fetchPosts()">
+          Fetch Posts
+        </button>
+        |
         <button
           class="btn btn-danger btn-sm"
           (click)="onClearPosts()"

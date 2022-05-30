@@ -1,0 +1,7 @@
+{
+    "/viewblogs": {
+      "target": "http://localhost:4200/viewblogs",
+      "secure": true,
+      "changeOrigin": false
+    }
+  }

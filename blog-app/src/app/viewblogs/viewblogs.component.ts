@@ -1,7 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { map } from 'rxjs';
+import { BlogsComponent } from '../blogs/blogs.component';
 import { PostData } from '../blogs/postdata.model';
+import { EditServiceService } from '../edit-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-viewblogs',
@@ -10,7 +13,7 @@ import { PostData } from '../blogs/postdata.model';
 })
 export class ViewblogsComponent implements OnInit {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http : HttpClient, private editService : EditServiceService, private router : Router) { }
   fetchedPosts: PostData[] = [];
   firebaseUrl =
     'https://blog-app-e6bdb-default-rtdb.firebaseio.com/posts.json';
@@ -26,8 +29,19 @@ export class ViewblogsComponent implements OnInit {
     });
   }
 
-  editBlog(fetchedPostsFromUI : []){
+  editBlog(fetchedPostsFromUI: {content:string, title:string, id:string}){
     console.log(fetchedPostsFromUI);
+    this.editService.setTitle(fetchedPostsFromUI.title);
+    this.editService.setContent(fetchedPostsFromUI.content);
+    this.router.navigateByUrl('/writeblog');
   }
 
+  deleteBlog(fetchedPostDelete: {content:string, title:string, id:string}){
+    const deleteUrl = "https://blog-app-e6bdb-default-rtdb.firebaseio.com/posts/" +fetchedPostDelete.id;
+    this.http.delete(deleteUrl).subscribe((response) => {
+      console.log(fetchedPostDelete.id);
+      console.log("Deleted Post!");
+    });
+    // console.log(fetchedPostDelete.id);
+  }
 }

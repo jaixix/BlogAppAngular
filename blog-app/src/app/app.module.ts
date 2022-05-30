@@ -12,7 +12,7 @@ import { ViewblogsComponent } from './viewblogs/viewblogs.component';
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'writeblog', component: BlogsComponent},
-  { path: 'viewblogs', component: ViewblogsComponent},
+  { path: 'viewblogs', component: ViewblogsComponent  },
 ];
 
 @NgModule({
