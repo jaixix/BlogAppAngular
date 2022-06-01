@@ -7,27 +7,26 @@
   <div class="row m-3">
     <div class="col">
       <ul class="list-group">
-        <li
-          class="list-group-item"
-          *ngFor="let post of fetchedPosts; let i = index"
-        >
-          <h3>{{ post.title }}</h3>
-          <p>{{ post.content }}</p>
-          <button
-            class="btn btn-sm btn-success"
-            (click)="editBlog(fetchedPosts[i])"
-          >
-            Edit
-          </button>
-          |
-          <button
-            class="btn btn-sm btn-danger"
-            (click)="deleteBlog(fetchedPosts[i])"
-          >
-            Delete
-          </button>
-          <br />
-        </li>
+        <div *ngFor="let post of fetchedPosts; let i = index">
+          <li class="list-group-item" *ngIf="fetchedPosts[i].id != 'null'">
+            <h3>{{ post.title }}</h3>
+            <p>{{ post.content }}</p>
+            <button
+              class="btn btn-sm btn-success"
+              (click)="editBlog(fetchedPosts[i])"
+            >
+              Edit
+            </button>
+            |
+            <button
+              class="btn btn-sm btn-danger"
+              (click)="fetchedPosts[i].id = 'null'"
+            >
+              Delete
+            </button>
+            <br />
+          </li>
+        </div>
       </ul>
     </div>
   </div>

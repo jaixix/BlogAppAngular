@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit, Output } from '@angular/core';
 import { map } from 'rxjs';
 import { BlogsComponent } from '../blogs/blogs.component';
@@ -29,6 +29,11 @@ export class ViewblogsComponent implements OnInit {
     });
   }
 
+  private personalHeaders = new HttpHeaders({"Access-Control-Allow-Origin" : '*',
+  "Access-Control-Allow-Methods" : 'GET,POST,PATCH,DELETE,PUT,OPTIONS',
+  "Access-Control-Allow-Headers" : 'Origin, Content-Type, X-Auth-Token, content-type',
+  });
+
   editBlog(fetchedPostsFromUI: {content:string, title:string, id:string}){
     console.log(fetchedPostsFromUI);
     this.editService.setTitle(fetchedPostsFromUI.title);
@@ -36,12 +41,26 @@ export class ViewblogsComponent implements OnInit {
     this.router.navigateByUrl('/writeblog');
   }
 
-  deleteBlog(fetchedPostDelete: {content:string, title:string, id:string}){
-    const deleteUrl = "https://blog-app-e6bdb-default-rtdb.firebaseio.com/posts/" +fetchedPostDelete.id;
-    this.http.delete(deleteUrl).subscribe((response) => {
-      console.log(fetchedPostDelete.id);
-      console.log("Deleted Post!");
+  deleteBlog(fetchedPostDelete: {content:string, title:string, id: string}){
+    // const deleteUrl = "https://blog-app-e6bdb-default-rtdb.firebaseio.com/posts/" +fetchedPostDelete.id;
+    // console.log(deleteUrl);
+    // this.http.delete(deleteUrl, {headers : this.personalHeaders}).subscribe((responseData) => {
+    //   console.log(fetchedPostDelete.id);
+    //   alert("Deleted Post!");
+    // });
+    // const deleteUrl = "https://blog-app-e6bdb-default-rtdb.firebaseio.com/posts/" +fetchedPostDelete.id;
+    // this.http.put(deleteUrl, fetchedPostDelete).subscribe(responseData => {
+    //   fetchedPostDelete.title='New title';
+    //   console.log(fetchedPostDelete.id);
+    // });
+    // console.log(fetchedPostDelete);
+    this.reloadCurrentRoute();
+  }
+
+  reloadCurrentRoute() {
+    let currentUrl = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+        this.router.navigate([currentUrl]);
     });
-    // console.log(fetchedPostDelete.id);
   }
 }
